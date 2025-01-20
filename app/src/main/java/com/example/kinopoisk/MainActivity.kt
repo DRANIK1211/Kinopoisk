@@ -12,7 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.kinopoisk.news.NewsScreen
+import com.example.kinopoisk.screen.news.NewsScreen
+import com.example.kinopoisk.screen.search.SearchScreen
 import com.example.kinopoisk.ui.theme.KinopoiskTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Start(modifier: Modifier = Modifier) {
-    NewsScreen()
+    SearchScreen()
 }
 
 @Preview(device = Devices.PIXEL_4, showBackground = true, showSystemUi = true)

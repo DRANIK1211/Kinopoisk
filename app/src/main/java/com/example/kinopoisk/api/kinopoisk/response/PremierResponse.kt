@@ -1,4 +1,4 @@
-package com.example.kinopoisk.api.kinopoisk
+package com.example.kinopoisk.api.kinopoisk.response
 
 
 import com.google.gson.annotations.SerializedName

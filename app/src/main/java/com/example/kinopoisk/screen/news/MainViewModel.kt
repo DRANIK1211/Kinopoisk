@@ -1,6 +1,7 @@
-package com.example.kinopoisk.news
+package com.example.kinopoisk.screen.news
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -8,7 +9,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kinopoisk.api.Retrofit
-import com.example.kinopoisk.news.components.Film
+import com.example.kinopoisk.screen.news.components.Film
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,8 +18,10 @@ import java.util.Calendar
 import java.util.Locale
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
+
+    var TAG = "INTERNET"
     private val _listFilms = MutableStateFlow(mutableListOf<Film>())
-    var listFilms:StateFlow<MutableList<Film>> = _listFilms.asStateFlow()
+    var listFilms: StateFlow<MutableList<Film>> = _listFilms.asStateFlow()
 
     fun getCurrentYear(): Int {
         val calendar = Calendar.getInstance()
@@ -31,18 +34,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getPremierFilms() {
+
         viewModelScope.launch {
             val currentYear = getCurrentYear()
             val currentMonth = getCurrentMonth()
             var l = Retrofit.getFilmService().getPremier(year = currentYear, month = currentMonth)
-            _listFilms.value = mutableListOf<Film>()
+            Log.d(TAG,"Data recived")
+            Log.d(TAG,"Data is ${l.toString()}")
+            var nlist= mutableListOf<Film>()
             l.items.forEach {
-                _listFilms.value.add(
+                nlist.add(
                     Film(
                         name = it.nameRu,
                         imageUrl = it.posterUrlPreview,
                         year = it.year,
-                        duration = it.duration,
+                        duration = it.duration.toString(),
                         genres = it.genres.map { it.genre },
                         countrys = it.countries.map { it.country },
                         premiereDate = it.premiereRu,
@@ -51,9 +57,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     )
                 )
             }
+            _listFilms.value = nlist
+            Log.d(TAG,"in _list = ${_listFilms.value.toString()}")
+            Log.d(TAG,"in list = ${listFilms.value.toString()}")
 
         }
     }
+
 
 
 }

@@ -1,26 +1,20 @@
-package com.example.kinopoisk.news.components
+package com.example.kinopoisk.screen.search.components
+
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Devices
@@ -28,25 +22,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import coil3.compose.AsyncImagePreviewHandler
 import com.example.kinopoisk.R
-import java.util.Vector
 
-data class Film(
+data class FilmSearch(
     var name: String,
     var imageUrl: String,
     var year: Int,
-    var duration: Int,
+    var duration: String,
     var genres: List<String>,
     var countrys:  List<String>,
-    var premiereDate: String,
+    var rating: String,
     var favorites: Boolean,
-    var originalName: String? = null
+    var originalName: String? = null,
+    var typeFilm: String
 )
 
 @Composable
-fun FilmComponents(
-    film: Film
+fun FilmComponentsSearch(
+    film: FilmSearch
 ) {
 
     Column(
@@ -73,7 +66,7 @@ fun FilmComponents(
                     .padding(start = 20.dp)
             ) {
                 Text(
-                    text = film.name,
+                    text = film.name + if(film.typeFilm == "TV_SERIES") " (Сериал)" else "",
                     fontSize = 17.sp,
                     fontWeight = FontWeight(700),
                     maxLines = 1,
@@ -95,21 +88,15 @@ fun FilmComponents(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(top = 3.dp)
+                        .background(Color(0, 123, 0))
 
                 ) {
-                    Image(
-
-                        imageVector = ImageVector.vectorResource(R.drawable.time),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .width(15.dp)
-                            .height(15.dp)
-                            .padding(end = 4.dp)
-                    )
                     Text(
-                        text = film.premiereDate.split("-").reversed().joinToString("."),
+                        text = film.rating,
                         fontSize = 11.sp,
-                        fontWeight = FontWeight(300)
+                        fontWeight = FontWeight(300),
+                        modifier = Modifier.padding(top = 5.dp, start=5.dp, end=5.dp, bottom = 5.dp)
+                        , color = Color(255, 255 ,255)
                     )
                 }
             }
@@ -129,16 +116,17 @@ fun FilmComponents(
 @Preview(showSystemUi = true, device = Devices.PIXEL_4)
 @Composable
 fun FilmComponentsPreview() {
-    FilmComponents(
-        Film(
-            name = "Волшебник Изумрудного города. Дорога из жёлтого кирпича",
+    FilmComponentsSearch(
+        FilmSearch(
+            name = "Волшебник",
             imageUrl = "https://kinopoiskapiunofficial.tech/images/posters/kp/5047471.jpg",
             year = 2024,
-            duration = 103,
+            duration = "01:01",
             genres = listOf("фэнтези", "приключения", "семейный"),
             countrys = listOf("Россия"),
-            premiereDate = "2020-06-01",
-            favorites = false
+            rating = "7.1",
+            favorites = false,
+            typeFilm = "TV_SERIES"
         )
     )
 

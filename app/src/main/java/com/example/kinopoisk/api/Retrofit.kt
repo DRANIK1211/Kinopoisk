@@ -1,6 +1,7 @@
 package com.example.kinopoisk.api
 
 import com.example.kinopoisk.api.kinopoisk.FilmService
+import com.example.kinopoisk.screen.search.components.FilmSearch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
