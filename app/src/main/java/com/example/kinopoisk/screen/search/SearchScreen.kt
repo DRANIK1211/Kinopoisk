@@ -31,14 +31,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kinopoisk.R
+import com.example.kinopoisk.screen.news.MainViewModel
+import com.example.kinopoisk.screen.news.components.FilmComponents
 import com.example.kinopoisk.screen.search.components.FilmComponentsSearch
+import kotlinx.serialization.Serializable
+
+@Serializable
+object SearchScreen
+
 
 @Composable
 fun SearchScreen() {
-    val viewModel  = viewModel<SearchScreenViewModel>()
+    val viewModel = viewModel<SearchScreenViewModel>()
     var films = viewModel.listFilms.collectAsState()
 
 
+    val TAG = "qwe"
     var textSearch: String by remember { mutableStateOf("чебурашка") }
 
     Column(
@@ -90,11 +98,8 @@ fun SearchScreen() {
             }
         }
 
-
         LazyColumn() {
-            Log.d("dsgfnd","data of films ${films.value.toString()}")
             items(films.value) {
-                Log.d("Tasdrf", "Out film ${it.name}")
                 FilmComponentsSearch(it)
             }
         }

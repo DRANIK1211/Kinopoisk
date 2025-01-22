@@ -3,6 +3,7 @@ package com.example.kinopoisk.screen.search.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,9 +26,10 @@ import coil3.compose.AsyncImage
 import com.example.kinopoisk.R
 
 data class FilmSearch(
+    var ID: Long,
     var name: String,
     var imageUrl: String,
-    var year: Int,
+    var year: String,
     var duration: String,
     var genres: List<String>,
     var countrys:  List<String>,
@@ -44,6 +46,9 @@ fun FilmComponentsSearch(
 
     Column(
         modifier = Modifier.fillMaxWidth()
+            .clickable {
+
+            }
     ) {
         HorizontalDivider(
             modifier = Modifier.padding(vertical = 10.dp),
@@ -120,13 +125,14 @@ fun FilmComponentsPreview() {
         FilmSearch(
             name = "Волшебник",
             imageUrl = "https://kinopoiskapiunofficial.tech/images/posters/kp/5047471.jpg",
-            year = 2024,
+            year = "2024",
             duration = "01:01",
             genres = listOf("фэнтези", "приключения", "семейный"),
             countrys = listOf("Россия"),
             rating = "7.1",
             favorites = false,
-            typeFilm = "TV_SERIES"
+            typeFilm = "TV_SERIES",
+            ID = 135416
         )
     )
 

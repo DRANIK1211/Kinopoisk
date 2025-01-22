@@ -19,7 +19,7 @@ data class FilmSearchResponse(
         @SerializedName("description")
         val description: String,
         @SerializedName("filmId")
-        val filmId: Int,
+        val filmId: Long,
         @SerializedName("filmLength")
         val filmLength: String,
         @SerializedName("genres")

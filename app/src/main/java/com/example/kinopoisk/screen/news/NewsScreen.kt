@@ -15,9 +15,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kinopoisk.screen.news.components.FilmComponents
+import kotlinx.serialization.Serializable
+
+@Serializable
+object NewsScreen
 
 @Composable
-fun NewsScreen(){
+fun NewsScreen(modifier: Modifier){
     val viewModel: MainViewModel = viewModel<MainViewModel>()
     var listFilm = viewModel.listFilms.collectAsState()
     viewModel.getPremierFilms()
@@ -47,6 +51,6 @@ fun NewsScreen(){
 @Preview(showSystemUi = true, device = Devices.PIXEL_4)
 @Composable
 fun NewsScreenPreview(){
-    NewsScreen()
+    NewsScreen(Modifier)
 }
 
