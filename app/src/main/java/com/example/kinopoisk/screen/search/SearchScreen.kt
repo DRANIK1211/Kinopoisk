@@ -47,7 +47,7 @@ fun SearchScreen() {
 
 
     val TAG = "qwe"
-    var textSearch: String by remember { mutableStateOf("чебурашка") }
+    var textSearch: String by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
