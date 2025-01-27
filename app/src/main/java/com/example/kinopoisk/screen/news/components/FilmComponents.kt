@@ -1,6 +1,7 @@
 package com.example.kinopoisk.screen.news.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,16 +42,20 @@ data class Film(
     var countrys:  List<String>,
     var premiereDate: String,
     var favorites: Boolean,
-    var originalName: String? = null
+    var originalName: String? = null,
+    var id: Int
 )
 
 @Composable
 fun FilmComponents(
-    film: Film
+    film: Film,
+    onClick:(id:Int)->Unit
 ) {
 
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().clickable {
+            onClick(film.id)
+        }
     ) {
         HorizontalDivider(
             modifier = Modifier.padding(vertical = 10.dp),
@@ -138,9 +143,13 @@ fun FilmComponentsPreview() {
             genres = listOf("фэнтези", "приключения", "семейный"),
             countrys = listOf("Россия"),
             premiereDate = "2020-06-01",
-            favorites = false
+            favorites = false,
+            id = 123
         )
-    )
+    ){
+
+
+    }
 
 }
 

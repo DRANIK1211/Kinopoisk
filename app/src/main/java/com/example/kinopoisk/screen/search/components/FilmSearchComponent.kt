@@ -26,7 +26,7 @@ import coil3.compose.AsyncImage
 import com.example.kinopoisk.R
 
 data class FilmSearch(
-    var ID: Long,
+    var ID: Int,
     var name: String,
     var imageUrl: String,
     var year: String,
@@ -36,18 +36,19 @@ data class FilmSearch(
     var rating: String,
     var favorites: Boolean,
     var originalName: String? = null,
-    var typeFilm: String
+    var typeFilm: String,
 )
 
 @Composable
 fun FilmComponentsSearch(
-    film: FilmSearch
+    film: FilmSearch,
+    onClick:(id:Int)->Unit
 ) {
 
     Column(
         modifier = Modifier.fillMaxWidth()
             .clickable {
-
+                onClick(film.ID)
             }
     ) {
         HorizontalDivider(
@@ -134,7 +135,7 @@ fun FilmComponentsPreview() {
             typeFilm = "TV_SERIES",
             ID = 135416
         )
-    )
+    ){}
 
 }
 

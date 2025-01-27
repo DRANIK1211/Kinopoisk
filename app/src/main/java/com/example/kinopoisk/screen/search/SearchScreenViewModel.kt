@@ -30,7 +30,7 @@ class SearchScreenViewModel(application: Application) : AndroidViewModel(applica
                 nlist.add(
                     FilmSearch(
                         name = it.nameRu,
-                        imageUrl = it.posterUrlPreview,
+                        imageUrl = it.posterUrl,
                         year = it.year,
                         duration = if(it.filmLength == null) "" else it.filmLength,
                         genres = it.genres.map { it.genre },
@@ -39,7 +39,7 @@ class SearchScreenViewModel(application: Application) : AndroidViewModel(applica
                         favorites = false,
                         originalName = it.nameEn,
                         typeFilm = it.type,
-                        ID = it.filmId
+                        ID = it.filmId,
                     )
                 )
             }

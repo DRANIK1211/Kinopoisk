@@ -30,7 +30,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.kinopoisk.R
+import com.example.kinopoisk.screen.info.InfoScreenData
 import com.example.kinopoisk.screen.news.MainViewModel
 import com.example.kinopoisk.screen.news.components.FilmComponents
 import com.example.kinopoisk.screen.search.components.FilmComponentsSearch
@@ -41,7 +43,7 @@ object SearchScreen
 
 
 @Composable
-fun SearchScreen() {
+fun SearchScreen(navController: NavController) {
     val viewModel = viewModel<SearchScreenViewModel>()
     var films = viewModel.listFilms.collectAsState()
 
@@ -100,7 +102,9 @@ fun SearchScreen() {
 
         LazyColumn() {
             items(films.value) {
-                FilmComponentsSearch(it)
+                FilmComponentsSearch(it){
+                    navController.navigate(InfoScreenData(it))
+                }
             }
         }
 
@@ -112,5 +116,5 @@ fun SearchScreen() {
 @Preview(showSystemUi = true, device = Devices.PIXEL_4)
 @Composable
 fun SearchScreenPreview() {
-    SearchScreen()
+
 }

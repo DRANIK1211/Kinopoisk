@@ -14,6 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.kinopoisk.screen.info.InfoScreenData
 import com.example.kinopoisk.screen.news.components.FilmComponents
 import kotlinx.serialization.Serializable
 
@@ -21,7 +24,7 @@ import kotlinx.serialization.Serializable
 object NewsScreen
 
 @Composable
-fun NewsScreen(modifier: Modifier){
+fun NewsScreen(modifier: Modifier, navController: NavController){
     val viewModel: MainViewModel = viewModel<MainViewModel>()
     var listFilm = viewModel.listFilms.collectAsState()
     viewModel.getPremierFilms()
@@ -40,7 +43,9 @@ fun NewsScreen(modifier: Modifier){
         LazyColumn() {
             items(listFilm.value) {
 
-                FilmComponents(it)
+                FilmComponents(it){
+                    navController.navigate(InfoScreenData(it))
+                }
             }
         }
 
@@ -51,6 +56,6 @@ fun NewsScreen(modifier: Modifier){
 @Preview(showSystemUi = true, device = Devices.PIXEL_4)
 @Composable
 fun NewsScreenPreview(){
-    NewsScreen(Modifier)
+    NewsScreen(Modifier, rememberNavController())
 }
 

@@ -53,7 +53,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         countrys = it.countries.map { it.country },
                         premiereDate = it.premiereRu,
                         favorites = false,
-                        originalName = it.nameEn
+                        originalName = it.nameEn,
+                        id = it.kinopoiskId
                     )
                 )
             }
